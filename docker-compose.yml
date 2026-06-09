@@ -1,0 +1,15 @@
+services:
+  app:
+    build:
+      context: .
+    container_name: gateway-server
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      SPRING_CONFIG_IMPORT: configserver:http://config-server:8888
+    networks:
+      - ms-net
+networks:
+  ms-net:
+    external: true
