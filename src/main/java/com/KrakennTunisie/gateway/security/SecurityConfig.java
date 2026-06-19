@@ -22,7 +22,7 @@ public class SecurityConfig {
         http
                 .httpBasic(basic -> basic.disable())
                 .formLogin(form -> form.disable())
-                .cors(cors -> cors.disable())
+                .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ← lie le CORS
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
