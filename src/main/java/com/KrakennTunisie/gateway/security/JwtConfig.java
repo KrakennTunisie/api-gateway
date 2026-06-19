@@ -1,4 +1,4 @@
-package com.KrakennTunisie.gateway.security;
+/*package com.KrakennTunisie.gateway.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,3 +13,4 @@ public class JwtConfig {
         return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 }
+ */
