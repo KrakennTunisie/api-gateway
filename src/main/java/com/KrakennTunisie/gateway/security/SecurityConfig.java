@@ -22,6 +22,7 @@ public class SecurityConfig {
         http
                 .httpBasic(basic -> basic.disable())
                 .formLogin(form -> form.disable())
+                .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.disable()))
                 .cors(cors -> cors.configurationSource(corsConfigurationSource())) // ← lie le CORS
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(auth -> auth
