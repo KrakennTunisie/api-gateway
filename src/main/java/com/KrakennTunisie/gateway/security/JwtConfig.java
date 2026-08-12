@@ -1,16 +1,19 @@
-/*package com.KrakennTunisie.gateway.security;
+package com.KrakennTunisie.gateway.security;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
-import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 @Configuration
 public class JwtConfig {
 
+    @Value("${keycloak.issuer-uri}")
+    private String issuerUri;
+
     @Bean
-    public JwtDecoder jwtDecoder() {
-        String jwkSetUri = "http://localhost:8080/realms/kerp/protocol/openid-connect/certs";
-        return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+    JwtDecoder jwtDecoder() {
+
+        return JwtDecoders.fromIssuerLocation(issuerUri);
     }
 }
- */
