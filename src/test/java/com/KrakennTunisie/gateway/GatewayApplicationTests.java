@@ -12,6 +12,9 @@ import org.springframework.test.context.TestPropertySource;
 })
 class GatewayApplicationTests {
 
+	@MockBean
+	private JwtDecoder jwtDecoder;
+
 	@Test
 	void contextLoads() {
 	}
