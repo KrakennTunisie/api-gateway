@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.jwt.JwtDecoders;
 @Configuration
 public class JwtConfig {
 
-    @Value("${keycloak.issuer-uri}")
+    @Value("${keycloak.issuer-uri:uri}")
     private String issuerUri;
 
     @Bean
