@@ -8,6 +8,7 @@ services:
     restart: unless-stopped
     environment:
       SPRING_PROFILES_ACTIVE: prod
+      KEYCLOAK_URL: ${KEYCLOAK_URL}
     networks:
       - ms-net
 networks:
