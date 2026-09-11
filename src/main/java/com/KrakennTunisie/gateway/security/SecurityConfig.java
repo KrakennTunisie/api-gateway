@@ -3,6 +3,7 @@ package com.KrakennTunisie.gateway.security;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.web.server.SecurityWebFilterChain;
@@ -15,7 +16,7 @@ import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 @EnableWebFluxSecurity
 public class SecurityConfig {
 
-    @Bean
+   /* @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
@@ -29,10 +30,28 @@ public class SecurityConfig {
                 );
 
         return http.build();
+    }*/
+
+    @Bean
+    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
+        http
+                .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
+                .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
+                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
+                .csrf(ServerHttpSecurity.CsrfSpec::disable)
+                .authorizeExchange(auth -> auth
+                        .pathMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .anyExchange().authenticated()
+                )
+                .oauth2ResourceServer(oauth2 -> oauth2
+                        .bearerTokenConverter(new CookieBearerTokenServerAuthenticationConverter())
+                        .jwt(Customizer.withDefaults())
+                );
+
+        return http.build();
     }
 
-    /*
-    @Bean
+   /* @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
         http
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
@@ -47,7 +66,7 @@ public class SecurityConfig {
 
         return http.build();
     }
-    */
+*/
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
